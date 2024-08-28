@@ -1,4 +1,4 @@
-# 🎓 EduFlex - Flexible Lesson Planning for Educators 🎓
+# 🎓 EduFlex - Flexible Lesson Planning for Educators 🎓 
 
 ---
 
@@ -28,46 +28,40 @@ EduFlex là một nền tảng hỗ trợ lập kế hoạch giảng dạy linh 
 
 ---
 
-## 📦 Installation
+**## 📖 Usage**
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/edu-flex-be.git
-
-# Navigate to the project directory
-cd edu-flex-be
-
-# Install dependencies
-dotnet restore
-
-# Build the project
-dotnet build
-
-# Run the application
-dotnet run
+1. **Đăng ký**: Người dùng có thể đăng ký tài khoản miễn phí hoặc nâng cấp gói dịch vụ.
+2. **Quản lý giáo án**: Tạo và quản lý giáo án với các công cụ trực quan.
+3. **Chia sẻ**: Chia sẻ giáo án với đồng nghiệp hoặc xuất bản công khai.
+4. **Tùy chỉnh giao diện**: Điều chỉnh giao diện để phù hợp với phong cách giảng dạy cá nhân.
 
 ---
 
-📖 Usage
-Đăng ký: Người dùng có thể đăng ký tài khoản miễn phí hoặc nâng cấp gói dịch vụ.
-Quản lý giáo án: Tạo và quản lý giáo án với các công cụ trực quan.
-Chia sẻ: Chia sẻ giáo án với đồng nghiệp hoặc xuất bản công khai.
-Tùy chỉnh giao diện: Điều chỉnh giao diện để phù hợp với phong cách giảng dạy cá nhân.
+**## 🎯 Roadmap**
 
-🎯 Roadmap
- 🌟 Hỗ trợ nhiều ngôn ngữ (optional)
- 🌍 Tích hợp với Google Classroom (optional)
- 🧩 Plugin tùy chỉnh cho giáo viên (optional)
- 📱 Ứng dụng di động (optional)
+- [ ] 🌟 Hỗ trợ nhiều ngôn ngữ (optional)
+- [ ] 🌍 Tích hợp với Google Classroom (optional)
+- [ ] 🧩 Plugin tùy chỉnh cho giáo viên (optional)
+- [ ] 📱 Ứng dụng di động (optional)
 
-🤝 Contributing
-Contributions are welcome! Please see the contributing guidelines for more details.
+---
 
-🛡️ License
-This project is licensed under the MIT License - see the LICENSE file for details.
+**## 🤝 Contributing**
 
-💬 Contact
-Have questions? Reach out to me via Email or find me on LinkedIn.
+Contributions are welcome! Please see the [contributing guidelines](CONTRIBUTING.md) for more details.
 
-Made with ❤️ by Fuko™ 
+---
 
+**## 🛡️ License**
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**## 💬 Contact**
+
+Have questions? Reach out to me via [Email](mailto:minhtam250102@gmail.com) or find me on [Facebook](https://www.facebook.com/pvmt25).
+
+---
+
+### Made with ❤️ by Fuko™
