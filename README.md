@@ -1,4 +1,4 @@
-# 🎓 EduFlex - Flexible Lesson Planning for Educators 🎓 
+## 🎓 EduFlex - Flexible Lesson Planning for Educators 🎓 
 
 ---
 
@@ -6,7 +6,7 @@ EduFlex là một nền tảng hỗ trợ lập kế hoạch giảng dạy linh 
 
 ---
 
-## 🚀 Features
+### 🚀 Features
 
 - **📅 Quản lý Giáo án**: Tạo mới, chỉnh sửa, và cập nhật giáo án theo cấu trúc chi tiết của khung chương trình chuẩn MOET.
 - **📄 Xuất File**: Xuất giáo án thành định dạng PDF hoặc Word.
@@ -18,7 +18,7 @@ EduFlex là một nền tảng hỗ trợ lập kế hoạch giảng dạy linh 
 
 ---
 
-## 🛠️ Technologies
+### 🛠️ Technologies
 
 - **Backend**: ASP.NET Core, Entity Framework Core
 - **Database**: SQL Server
@@ -28,7 +28,7 @@ EduFlex là một nền tảng hỗ trợ lập kế hoạch giảng dạy linh 
 
 ---
 
-**## 📖 Usage**
+### 📖 Usage
 
 1. **Đăng ký**: Người dùng có thể đăng ký tài khoản miễn phí hoặc nâng cấp gói dịch vụ.
 2. **Quản lý giáo án**: Tạo và quản lý giáo án với các công cụ trực quan.
@@ -37,7 +37,7 @@ EduFlex là một nền tảng hỗ trợ lập kế hoạch giảng dạy linh 
 
 ---
 
-**## 🎯 Roadmap**
+### 🎯 Roadmap
 
 - [ ] 🌟 Hỗ trợ nhiều ngôn ngữ (optional)
 - [ ] 🌍 Tích hợp với Google Classroom (optional)
@@ -46,19 +46,19 @@ EduFlex là một nền tảng hỗ trợ lập kế hoạch giảng dạy linh 
 
 ---
 
-**## 🤝 Contributing**
+### 🤝 Contributing
 
 Contributions are welcome! Please see the [contributing guidelines](CONTRIBUTING.md) for more details.
 
 ---
 
-**## 🛡️ License**
+### 🛡️ License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**## 💬 Contact**
+### 💬 Contact
 
 Have questions? Reach out to me via [Email](mailto:minhtam250102@gmail.com) or find me on [Facebook](https://www.facebook.com/pvmt25).
 
