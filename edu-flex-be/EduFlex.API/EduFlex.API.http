@@ -1,0 +1,6 @@
+@EduFlex.API_HostAddress = http://localhost:5148
+
+GET {{EduFlex.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
