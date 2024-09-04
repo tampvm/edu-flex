@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EduFlex.Repository\EduFlex.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>
