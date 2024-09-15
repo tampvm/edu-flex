@@ -23,7 +23,6 @@
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Data\" />
-    <Folder Include="FluentAPIs\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Migrations\" />
     <Folder Include="Repositories\" />
