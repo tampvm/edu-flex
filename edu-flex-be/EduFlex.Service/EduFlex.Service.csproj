@@ -16,7 +16,6 @@
     <Folder Include="Mappers\" />
     <Folder Include="Models\" />
     <Folder Include="Utils\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

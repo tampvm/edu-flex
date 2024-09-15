@@ -1,4 +1,7 @@
 ﻿using EduFlex.Repository.Data;
+using EduFlex.Repository.Interfaces;
+using EduFlex.Repository.Repositories;
+using EduFlex.Service.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Elepla.API
@@ -19,8 +22,8 @@ namespace Elepla.API
 
         public static IServiceCollection AddInfrastructuresService(this IServiceCollection services, string databaseConnection)
         {
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<ICurrentTime, CurrentTime>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICurrentTime, CurrentTime>();
 
             services.AddDbContext<AppDbContext>(option => option.UseSqlServer(databaseConnection));
 
