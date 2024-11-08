@@ -3,7 +3,7 @@ builder = "dockerfile"
 dockerfilePath = "./EduFlex.API/Dockerfile"
 
 [deploy]
-startCommand = "./EduFlex.API"
+startCommand = "dotnet EduFlex.API.dll"
 restartPolicyType = "always"
 healthCheckPath = "/health"
 port = 8080
