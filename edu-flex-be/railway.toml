@@ -1,0 +1,8 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "./EduFlex.API/Dockerfile"
+
+[deploy]
+startCommand = "./EduFlex.API"
+restartPolicyType = "always"
+healthCheckPath = "/health"
