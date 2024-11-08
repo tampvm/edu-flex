@@ -1,8 +1,9 @@
 [build]
 builder = "dockerfile"
-dockerfilePath = "./EduFlex.API/Dockerfile"
+dockerfilePath = "./TestRailway/Dockerfile"
 
 [deploy]
-startCommand = "./EduFlex.API"
+startCommand = "dotnet TestRailway.dll"
 restartPolicyType = "always"
 healthCheckPath = "/health"
+port = 8080
