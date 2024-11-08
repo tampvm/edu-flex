@@ -6,6 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>d5c9880e-dbed-4c51-8ef2-1b04c9c1abf1</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	  <OutputType>Exe</OutputType>
+	  <PublishAot>true</PublishAot>
+	  <InvariantGlobalization>true</InvariantGlobalization>
+	  <!-- Tùy chọn để giảm kích thước -->
   </PropertyGroup>
 
   <ItemGroup>
