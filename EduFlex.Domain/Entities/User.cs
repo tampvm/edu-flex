@@ -11,7 +11,7 @@ namespace EduFlex.Domain.Entities
     public class User : BaseEntity
     {
         // Primary key
-        public string Id { get; set; }
+        public string UserId { get; set; }
 
         // Attributes
         public string? FirstName { get; set; }
@@ -25,7 +25,7 @@ namespace EduFlex.Domain.Entities
         public bool PhoneNumberConfirmed { get; set; }
         public string? GoogleEmail { get; set; }
         public string? FacebookEmail { get; set; }
-        public string? AddressText { get; set; }
+        public string? AddressLine { get; set; }
         public string? City { get; set; }    
         public string? District { get; set; }
         public string? Ward { get; set; }
@@ -45,5 +45,12 @@ namespace EduFlex.Domain.Entities
         public virtual Role Role { get; set; }
         public virtual Image Avatar { get; set; }
         public virtual Image Background { get; set; }
+		public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+        public virtual ICollection<UserPackage> UserPackages { get; set; } = new List<UserPackage>();
+        public virtual ICollection<PlanbookCollection> PlanbookCollections { get; set; } = new List<PlanbookCollection>();
+        public virtual ICollection<TeachingSchedule> TeachingSchedules { get; set; } = new List<TeachingSchedule>();
+        public virtual ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
+		public virtual ICollection<PlanBookShare> PlanbookShares { get; set; } = new List<PlanBookShare>();
+        public virtual ICollection<Exam> Exams { get; set; } = new List<Exam>();
     }
 }

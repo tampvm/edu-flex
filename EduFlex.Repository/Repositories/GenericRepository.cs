@@ -14,19 +14,47 @@ namespace EduFlex.Repository.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
     {
-        protected AppDbContext _context;
+        protected AppDbContext _dbContext;
         protected DbSet<TEntity> _dbSet;
-        private readonly ICurrentTime _timeService;
-        //private readonly IClaimsService _claimsService;
+        private readonly ITimeService _timeService;
+        private readonly IClaimsService _claimsService;
 
-        public GenericRepository(AppDbContext context, ICurrentTime timeService/*, IClaimsService claimsService*/)
+        public GenericRepository(AppDbContext dbContext, ITimeService timeService, IClaimsService claimsService)
         {
-            _context = context;
-            _dbSet = _context.Set<TEntity>();
+            _dbContext = dbContext;
+            _dbSet = _dbContext.Set<TEntity>();
             _timeService = timeService;
-            //_claimsService = claimsService;
+            _claimsService = claimsService;
         }
 
+        // Get all with filter, order by, include properties or not
+        public async Task<IEnumerable<TEntity>> GetAllAsync(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "")
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            return await query.ToListAsync();
+        }
+
+        // Get all with filter, order by, include properties or not with pagination
         public async Task<Pagination<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
@@ -80,11 +108,13 @@ namespace EduFlex.Repository.Repositories
             };
         }
 
+        // Get by Id
         public async Task<TEntity?> GetByIdAsync(object id)
         {
             return await _dbSet.FindAsync(id);
         }
 
+        // Get by Id with filter and include properties
         public async Task<TEntity?> GetByIdAsync(object id, Expression<Func<TEntity, bool>> filter = null, string includeProperties = "")
         {
             IQueryable<TEntity> query = _dbSet;
@@ -101,7 +131,7 @@ namespace EduFlex.Repository.Repositories
                 query = query.Include(includeProperty);
             }
 
-            var keyName = _context.Model.FindEntityType(typeof(TEntity)).FindPrimaryKey().Properties
+            var keyName = _dbContext.Model.FindEntityType(typeof(TEntity)).FindPrimaryKey().Properties
                 .Select(x => x.Name).Single();
 
             var parameter = Expression.Parameter(typeof(TEntity));
@@ -115,81 +145,97 @@ namespace EduFlex.Repository.Repositories
             return await query.FirstOrDefaultAsync(lambda);
         }
 
+        // Add entity
         public async Task AddAsync(TEntity entity)
         {
             entity.CreatedAt = _timeService.GetCurrentTime();
-            //var currentUserId = _claimsService.GetCurrentUserId();
+            var currentUserId = _claimsService.GetCurrentUserId();
 
             // Check if ClaimService is available
-            //if (currentUserId != Guid.Empty)
-            //{
-            //    entity.CreatedBy = currentUserId.ToString();
-            //}
+            if (currentUserId != Guid.Empty)
+            {
+                entity.CreatedBy = currentUserId.ToString();
+            }
 
             await _dbSet.AddAsync(entity);
         }
 
+        // Add range of entities
         public async Task AddRangeAsync(List<TEntity> entities)
         {
             foreach (var entity in entities)
             {
                 entity.CreatedAt = _timeService.GetCurrentTime();
-                //entity.CreatedBy = _claimsService.GetCurrentUserId().ToString();
+                entity.CreatedBy = _claimsService.GetCurrentUserId().ToString();
             }
             await _dbSet.AddRangeAsync(entities);
         }
 
+        // Update entity
         public void Update(TEntity entity)
         {
-            entity.UpdatedAt = _timeService.GetCurrentTime();
-            //entity.UpdatedBy = _claimsService.GetCurrentUserId().ToString();
+            var currentUserId = _claimsService.GetCurrentUserId();
+
+            // Check if ClaimService is available
+            if (currentUserId != Guid.Empty)
+            {
+                entity.UpdatedAt = _timeService.GetCurrentTime();
+                entity.UpdatedBy = _claimsService.GetCurrentUserId().ToString();
+            }
+
             _dbSet.Update(entity);
         }
 
+        // Update range of entities
         public void UpdateRange(List<TEntity> entities)
         {
             foreach (var entity in entities)
             {
                 entity.UpdatedAt = _timeService.GetCurrentTime();
-                //entity.UpdatedBy = _claimsService.GetCurrentUserId().ToString();
+                entity.UpdatedBy = _claimsService.GetCurrentUserId().ToString();
             }
             _dbSet.UpdateRange(entities);
         }
 
+        // Soft remove entity
         public void SoftRemove(TEntity entity)
         {
             entity.IsDeleted = true;
             entity.DeletedAt = _timeService.GetCurrentTime();
-            //entity.DeletedBy = _claimsService.GetCurrentUserId().ToString();
+            entity.DeletedBy = _claimsService.GetCurrentUserId().ToString();
             _dbSet.Update(entity);
         }
 
+        // Soft remove range of entities
         public void SoftRemoveRange(List<TEntity> entities)
         {
             foreach (var entity in entities)
             {
                 entity.IsDeleted = true;
                 entity.DeletedAt = _timeService.GetCurrentTime();
-                //entity.DeletedBy = _claimsService.GetCurrentUserId().ToString();
+                entity.DeletedBy = _claimsService.GetCurrentUserId().ToString();
             }
             _dbSet.UpdateRange(entities);
         }
 
+        // Delete entity by Id
         public void Delete(object id)
         {
             TEntity entityToDelete = _dbSet.Find(id);
             Delete(entityToDelete);
         }
 
+        // Delete entity
         public void Delete(TEntity entityToDelete)
         {
-            if (_context.Entry(entityToDelete).State == EntityState.Detached)
+            if (_dbContext.Entry(entityToDelete).State == EntityState.Detached)
             {
                 _dbSet.Attach(entityToDelete);
             }
             _dbSet.Remove(entityToDelete);
         }
 
+        // Count entities with filter
         public async Task<int> CountAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             IQueryable<TEntity> query = _dbSet;
@@ -200,11 +246,6 @@ namespace EduFlex.Repository.Repositories
             }
 
             return await query.CountAsync();
-        }
-
-        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _dbSet.FirstOrDefaultAsync(predicate);
         }
     }
 }

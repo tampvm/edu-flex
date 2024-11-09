@@ -11,14 +11,17 @@ namespace EduFlex.Repository.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : BaseEntity
     {
+        Task<IEnumerable<TEntity>> GetAllAsync(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "");
         Task<Pagination<TEntity>> GetAsync(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "",
-            int? pageIndex = null, // Optional parameter for pagination (page number)
-            int? pageSize = null);  // Optional parameter for pagination (number of records per page)
+            int? pageIndex = null, 
+            int? pageSize = null);
         Task<TEntity?> GetByIdAsync(object id);
-        //Task<TEntity?> GetByIdAsync(object id, params Expression<Func<TEntity, object>>[] includes);
         Task<TEntity?> GetByIdAsync(object id, Expression<Func<TEntity, bool>> filter = null, string includeProperties = "");
         Task AddAsync(TEntity entity);
         Task AddRangeAsync(List<TEntity> entities);
@@ -28,8 +31,6 @@ namespace EduFlex.Repository.Interfaces
         void SoftRemoveRange(List<TEntity> entities);
         void Delete(object id);
         void Delete(TEntity entity);
-        Task<int> CountAsync(Expression<Func<TEntity, bool>> filter = null);
-        //findAsync
-        Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> filter = null);
+        Task<int> CountAsync(Expression<Func<TEntity, bool>> filter = null);   
     }
 }

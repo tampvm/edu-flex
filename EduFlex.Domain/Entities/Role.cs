@@ -8,16 +8,14 @@ using System.Threading.Tasks;
 
 namespace EduFlex.Domain.Entities
 {
-    [Table("Role")]
     public class Role : BaseEntity
     {
         // Primary Key
-        [Key]
-        public int Id { get; set; }
+        public int RoleId { get; set; }
 
         // Attributes
         public string Name { get; set; }
-        public string? Description { get; set; }
+        public bool IsDefault { get; set; }
 
         // Navigation properties
         public virtual ICollection<User> Users { get; set; } = new List<User>();

@@ -14,7 +14,7 @@ namespace EduFlex.Repository.FluentAPIs
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("User");
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.UserId);
             builder.Property(x => x.FirstName).HasMaxLength(50);
             builder.Property(x => x.LastName).HasMaxLength(50);
             builder.Property(x => x.Username).HasMaxLength(20);
@@ -34,6 +34,27 @@ namespace EduFlex.Repository.FluentAPIs
                 .WithMany(x => x.UserBackgrounds)
                 .HasForeignKey(x => x.BackgroundId)
                 .OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Payments)
+                .WithOne(x => x.Teacher)
+                .HasForeignKey(x => x.TeacherId);
+            builder.HasMany(x => x.UserPackages)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
+            builder.HasMany(x => x.PlanbookCollections)
+                .WithOne(x => x.Teacher)
+                .HasForeignKey(x => x.TeacherId);
+            builder.HasMany(x => x.TeachingSchedules)
+                .WithOne(x => x.Teacher)
+                .HasForeignKey(x => x.TeacherId);
+            builder.HasMany(x => x.Feedbacks)
+                .WithOne(x => x.Teacher)
+                .HasForeignKey(x => x.TeacherId);
+            builder.HasMany(x => x.PlanbookShares)
+				.WithOne(x => x.User)
+				.HasForeignKey(x => x.ShareBy);
+            builder.HasMany(x => x.Exams)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
         }
     }
 }
