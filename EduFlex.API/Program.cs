@@ -1,4 +1,4 @@
-using EduFlex.API;
+﻿using EduFlex.API;
 using EduFlex.Service.Common;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +9,10 @@ builder.WebHost.UseUrls($"http://*:{port}");
 //builder.Services.AddHealthChecks();
 
 var configuration = builder.Configuration.Get<AppConfiguration>();
+if (configuration?.DatabaseConnection == null || configuration.JWT == null)
+{
+    throw new Exception("Cấu hình không hợp lệ hoặc không được tải. Kiểm tra lại cấu hình hoặc biến môi trường.");
+}
 builder.Services.AddInfrastructuresService(configuration.DatabaseConnection);
 builder.Services.AddWebAPIService(configuration.JWT);
 builder.Services.AddSingleton(configuration);
