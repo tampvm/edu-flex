@@ -11,6 +11,8 @@ builder.WebHost.UseUrls($"http://*:{port}");
 var configuration = builder.Configuration.Get<AppConfiguration>();
 if (configuration?.DatabaseConnection == null || configuration.JWT == null)
 {
+    Console.WriteLine("DatabaseConnection: " + (configuration?.DatabaseConnection != null ? "Loaded" : "Not Loaded"));
+    Console.WriteLine("JWT: " + (configuration?.JWT != null ? "Loaded" : "Not Loaded"));
     throw new Exception("Cấu hình không hợp lệ hoặc không được tải. Kiểm tra lại cấu hình hoặc biến môi trường.");
 }
 builder.Services.AddInfrastructuresService(configuration.DatabaseConnection);
